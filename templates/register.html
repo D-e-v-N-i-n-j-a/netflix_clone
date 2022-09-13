@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/all.css' %}">
+    <title>NETFLIX CLONE</title>
+</head>
+<style>
+    body{
+        background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url('/static/img/bg.jpg');
+        overflow-y: hidden;
+    }
+    .logo > img{
+        height:50px;
+}
+.btn_login{
+    background-color:#E50913;
+    width: 70px;
+    height:30px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+   
+}
+a{
+    text-decoration: none;
+}
+.form_ctx{
+    width: 600px;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form_ctx > form{
+    width: 100%;
+
+}
+
+form >button{
+    background-color:#E50913;
+    border:1px solid #E50913;
+    color: white;
+    width: 200px;
+}
+</style>
+<body>
+    <header class="container-fluid d-flex justify-content-between mt-3">
+        <div class="logo">
+            <img src="{% static '/img/logo.png' %}" alt="">
+        </div>
+        <a class="btn_login" href="{% url 'login' %}" role="button">Sign in</a>
+
+      </header>
+      <div class="container-fluid row justify-content-center my-auto text-center text-white">
+       <div class="form_ctx">
+        <span class="fs-1 fw-bold">Unlimited movies,TV</span>
+        <p class="fs-2 fw-bold">shows, and more.</p>
+        <p class="fs-5">Watch anywhere.Cancel anytime</p>
+        <span>Ready to Watch? Enter your email to create or restart your membership </span>
+        <form action="" method="post" class="d-flex my-4 ">
+            <input class="form-control me-2" type="email" placeholder="Email address" aria-label="Search">
+           <button type="submit">Get Started</button>
+         
+        </form>
+       </div>
+      </div>
+</body>
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</html>

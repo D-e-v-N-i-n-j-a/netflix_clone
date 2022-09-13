@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>NETFLIX CLONE</title>
+</head>
+<style>
+    body{
+        background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url('/static/img/bg.jpg');
+        overflow-y: hidden;
+
+        
+        
+    }
+    .logo > img{
+        height:50px;
+    }
+
+    .login_container{
+        width:450px;
+        height:100vh;
+        background-color:  rgba(0, 0, 0, 0.6);
+    }
+    .login_container > form{
+        width: 70%;
+        margin:auto;
+    }
+    a{
+        text-decoration: none;
+    }
+    .field{
+        padding: 7px;
+        background-color: #333333;
+        border: 1px solid #333333;
+        border-radius: 0px;
+    }
+    button{
+        padding: 10px;
+    }
+    .register-ctx{
+      margin-top: 10rem;
+    }
+
+</style>
+<body>
+  <header class="container-fluid">
+    <div class="logo">
+        <img src="{% static '/img/logo.png' %}" alt="">
+    </div>
+  </header>
+  <!-- LOGIN CONTAINER -->
+  <div class="container d-flex justify-content-center my-3">
+  <div class="login_container">
+    <form action="" method="post" class="my-5">
+      {% csrf_token %}
+        <span class="fs-3 fw-bold text-light">Sign In</span>
+        <div class="col my-2">
+            <input type="text" class="form-control field" name="username" placeholder="User name" aria-label="User name" required>
+          </div>
+          <div class="col my-2">
+            <input type="password" name="password" class="form-control field" placeholder="Password" aria-label="Password" required>
+          </div>
+          <div class="d-grid gap-2 col mx-auto mt-5 mb-1">
+            <button class="btn btn-danger" type="submit">Sign In</button>
+          </div>
+          <div class="container-fluid d-flex justify-content-between">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label text-secondary" for="defaultCheck1">
+                  Remember me
+                </label>
+              </div>
+
+              <a href="#" class="link-dark text-secondary">Need Help?</a>
+
+          </div>
+          <div class="container-fluid d-flex register-ctx">
+            <span class="text-secondary">New to Netflix?  <a href="{% url 'register' %}" class="link-dark text-light">Sign up now</a></span>
+          </div>
+    </form>
+  </div>
+  </div>
+
+
+
+
+</body>
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</html>

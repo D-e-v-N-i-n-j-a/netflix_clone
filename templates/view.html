@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>NETFLIX CLONE</title>
+    <style>
+        body{
+            background:rgba(0, 0, 0, .9);
+        }
+        .header_background{
+            background:rgba(0, 0, 0, 1);
+            color: white;
+        }
+       .header{
+        color: #E50913;
+       }
+       .header:hover{
+        color:#f3212b;
+       }
+       .profile{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+       }
+    </style>
+</head>
+<body>
+    <nav class="navbar header_background navbar-expand-md sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand  fw-bold header" href="{% url 'homepage' %}">NETFLIX</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active text-light" aria-current="page" href="#">Movies</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">TV Shows</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Animation</a>
+                  </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <img class="profile" src="{{request.user.profile.pic.url}}" alt="">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                      <li><a class="dropdown-item " href="#">profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                      
+                    </ul>
+                  </li>
+                {% endif %}
+              </ul>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- VIDEO SECTION -->
+      <div class="container-fliud">
+        {% for x in movie %}
+        <video class="container-fluid" width="100%" height="540px" controls>
+            <source src="{{x.video.url}}" type="video/mp4">
+          </video>
+
+          <div class="col">
+            <h1 class="text-light fs-2">{{x.title}}</h1>
+            <span class='text-light'>{{x.date}}</span>
+            <div class="col">
+                <h1 class='text-light'>Movie Type</h1>
+                <span class='text-light'>{{x.genre}}</span>
+            </div>
+            <div class="col my-5">
+                <h1 class='text-light'>Details</h1>
+                <span class='text-light'>{{x.description}}</span>
+            </div>
+          </div>
+          {% endfor %}
+          
+          <div class="col my-5">
+            <h1 class="text-light mb-3">Comments</h1>
+            {% for comm in comment %}
+            <div class="container mx-0 my-3">
+                <div class="card bg-dark" style="width: 30rem;">
+                    <div class="card-header d-flex">
+                      <img class="profile" src="{{comm.user.profile.pic.url}}" alt="">
+                      <span class="mx-1 mt-1 text-light">{{comm.user.username}}</span>
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <p class='text-light'>{{comm.post}}</p>
+                      </blockquote>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- FORM POST -->
+        <form action="" method="post" class="d-flex my-5">
+            {% csrf_token %}
+            <input name='post' style="width: 30rem;" type="text" id="post" class="form-control" aria-describedby="passwordHelpBlock" required>
+            <button type="submit" class="btn btn-primary btn-sm">POST</button>
+        </form>
+      </div>
+      <!-- TRACK DETAILS -->
+      
+
+</body>
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</html>
