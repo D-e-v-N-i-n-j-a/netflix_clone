@@ -79,11 +79,14 @@
               </div>
 
               <a href="#" class="link-dark text-secondary">Need Help?</a>
-
           </div>
           <div class="container-fluid d-flex register-ctx">
-            <span class="text-secondary">New to Netflix?  <a href="{% url 'register' %}" class="link-dark text-light">Sign up now</a></span>
+            <span class="text-secondary">New to Netflix?  <a href="#" class="link-dark text-light">Sign up now</a></span>
           </div>
+          {% for message in messages %}
+              
+          <span class="text-danger">{{message}}</span>
+          {% endfor %}
     </form>
   </div>
   </div>

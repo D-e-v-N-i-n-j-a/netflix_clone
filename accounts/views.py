@@ -4,15 +4,10 @@ from django.contrib import messages
 # Create your views here.
 
 
-
 def register(request):
     
     return render(request,'register.html')
-            
-            
-    
-    
-    
+
 
 
 
@@ -25,8 +20,7 @@ def login(request):
             auth.login(request,user)
             return redirect('homepage')
         else:
-            print('something went wrong')
-            
+            messages.info(request,'invalid user')
             return redirect('login')
     
     

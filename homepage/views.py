@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib import auth
+from django.contrib.auth.models import auth,User
 from django.http import HttpResponseRedirect
 from .models import Movie,Comments
 # Create your views here.
@@ -8,6 +8,17 @@ from .models import Movie,Comments
 @login_required(login_url='login')
 def homepage(request):
     movie = Movie.objects.all()
+    user = auth.get_user(request)
+    
+    if request.method == 'POST':
+        title = request.POST['title'] 
+        desc = request.POST['description']
+        file = request.FILES['movie']
+        img = request.FILES['image']
+        video = Movie.objects.create(title=title,description=desc,video=file,image=img)
+        video.save()
+        
+    
     return render(request,'index.html',{'movie':movie})
 
 

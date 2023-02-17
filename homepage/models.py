@@ -27,14 +27,11 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='image')
-    genre = models.CharField(choices=CHOICES,max_length=100)
     video = models.FileField(upload_to='movie')
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
     
     
     def __str__(self) -> str:
-        return f'USER : {self.user.username} MOVIE :{self.title} DATE: {self.date}'
+        return f'USER :{self.title}'
     
 
 
